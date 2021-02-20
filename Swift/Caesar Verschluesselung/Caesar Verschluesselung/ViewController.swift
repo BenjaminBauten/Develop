@@ -57,4 +57,12 @@ class ViewController: UIViewController {
         }
     }
 
+    @IBAction func clearNormalTextButton(_ sender: Any) {
+        normalText.text = ""
+    }
+    
+    @IBAction func copyEncryptedTextButton(_ sender: Any) {
+        UIPasteboard.general.string = encryptedText.text
+    }
+    
 }
