@@ -1,9 +1,7 @@
-//
 //  ViewController.swift
 //  Caesar Verschluesselung
 //
 //  Created by Benjamin Bauten on 18/02/2021.
-//
 
 import UIKit
 
@@ -14,9 +12,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var encodeButton: UIButton!
     @IBOutlet weak var decodeButton: UIButton!
     @IBOutlet weak var positionTextField: UITextField!
-    
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         encodeButton.layer.cornerRadius = 10
@@ -25,7 +21,7 @@ class ViewController: UIViewController {
         encryptedText.layer.cornerRadius = 15
         // Do any additional setup after loading the view.
     }
-    
+
     func moveText(arg inputText: String, arg positionInt: Int) -> String{
         var outputText = ""
         for inputUnicodeScalar in inputText.unicodeScalars {
@@ -46,19 +42,19 @@ class ViewController: UIViewController {
         }
         return outputText
     }
-    
+
     @IBAction func encodeText(_ sender: Any) {
         if let positionString = positionTextField.text,
            let positionInt = Int(positionString){
             encryptedText.text = moveText(arg: normalText.text, arg: positionInt)
             }
     }
+
     @IBAction func decodeText(_ sender: Any) {
         if let positionString = positionTextField.text,
            let positionInt = Int(positionString){
             normalText.text = moveText(arg: encryptedText.text, arg: -positionInt)
         }
     }
-    
-    
+
 }
