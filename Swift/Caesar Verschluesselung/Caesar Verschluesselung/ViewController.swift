@@ -5,7 +5,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController{
 
     @IBOutlet weak var normalText: UITextView!
     @IBOutlet weak var encryptedText: UITextView!
@@ -47,6 +47,8 @@ class ViewController: UIViewController {
         if let positionString = positionTextField.text,
            let positionInt = Int(positionString){
             encryptedText.text = moveText(arg: normalText.text, arg: positionInt)
+            normalText.resignFirstResponder()
+            positionTextField.resignFirstResponder()
             }
     }
 
