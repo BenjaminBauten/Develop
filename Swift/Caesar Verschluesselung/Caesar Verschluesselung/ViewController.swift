@@ -55,7 +55,9 @@ class ViewController: UIViewController{
     @IBAction func decodeText(_ sender: Any) {
         if let positionString = positionTextField.text,
            let positionInt = Int(positionString){
-            normalText.text = moveText(arg: encryptedText.text, arg: -positionInt)
+            encryptedText.text = moveText(arg: normalText.text, arg: -positionInt)
+            normalText.resignFirstResponder()
+            positionTextField.resignFirstResponder()
         }
     }
 
