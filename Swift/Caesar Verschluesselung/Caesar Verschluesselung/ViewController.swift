@@ -44,20 +44,20 @@ class ViewController: UIViewController{
     }
 
     @IBAction func encodeText(_ sender: Any) {
+        normalText.resignFirstResponder()
+        positionTextField.resignFirstResponder()
         if let positionString = positionTextField.text,
            let positionInt = Int(positionString){
             encryptedText.text = moveText(arg: normalText.text, arg: positionInt)
-            normalText.resignFirstResponder()
-            positionTextField.resignFirstResponder()
             }
     }
 
     @IBAction func decodeText(_ sender: Any) {
+        normalText.resignFirstResponder()
+        positionTextField.resignFirstResponder()
         if let positionString = positionTextField.text,
            let positionInt = Int(positionString){
             encryptedText.text = moveText(arg: normalText.text, arg: -positionInt)
-            normalText.resignFirstResponder()
-            positionTextField.resignFirstResponder()
         }
     }
 
