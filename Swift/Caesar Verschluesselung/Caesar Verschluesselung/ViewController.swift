@@ -15,10 +15,10 @@ class ViewController: UIViewController{
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        encodeButton.layer.cornerRadius = 10
-        decodeButton.layer.cornerRadius = 10
-        normalText.layer.cornerRadius = 15
-        encryptedText.layer.cornerRadius = 15
+        encodeButton.layer.cornerRadius = 15
+        decodeButton.layer.cornerRadius = 15
+        normalText.layer.cornerRadius = 10
+        encryptedText.layer.cornerRadius = 10
         // Do any additional setup after loading the view.
     }
 
