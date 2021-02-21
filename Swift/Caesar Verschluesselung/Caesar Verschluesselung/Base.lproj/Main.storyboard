@@ -16,6 +16,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Et0-dE-Yop" userLabel="Hide Keyboard">
+                                <rect key="frame" x="16" y="44" width="358" height="766"/>
+                                <connections>
+                                    <action selector="hideKeyboardOnClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="8OF-dc-hDU"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Caesar's Cipher" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SXm-86-oSm">
                                 <rect key="frame" x="88" y="54" width="214" height="36"/>
                                 <constraints>
@@ -34,9 +40,9 @@
                                 </constraints>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hXj-6f-ai0">
+                            <textView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hXj-6f-ai0">
                                 <rect key="frame" x="26" y="489" width="338" height="240"/>
                                 <color key="backgroundColor" systemColor="systemGray4Color"/>
                                 <constraints>
@@ -117,7 +123,10 @@
                             <constraint firstItem="lbX-6N-zXD" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="KEs-HG-D91"/>
                             <constraint firstItem="GIj-ed-Mep" firstAttribute="top" secondItem="aVe-xz-gCD" secondAttribute="bottom" constant="50" id="MGe-hf-0i9"/>
                             <constraint firstItem="lbX-6N-zXD" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="OQW-GF-Zad"/>
+                            <constraint firstItem="Et0-dE-Yop" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="QJ5-wP-Kfk"/>
+                            <constraint firstItem="Et0-dE-Yop" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="RLi-TY-41g"/>
                             <constraint firstItem="hXj-6f-ai0" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="bfN-5f-0mR"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="Et0-dE-Yop" secondAttribute="bottom" id="bmH-re-fD0"/>
                             <constraint firstItem="GIj-ed-Mep" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="byJ-D4-Z9x"/>
                             <constraint firstItem="RgT-Vp-RPr" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="10" id="gtr-te-8No"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Ws8-BA-h7r" secondAttribute="trailing" constant="10" id="he5-0P-A9G"/>
@@ -126,6 +135,7 @@
                             <constraint firstItem="8vw-eY-b1q" firstAttribute="top" secondItem="hXj-6f-ai0" secondAttribute="bottom" constant="5" id="oQZ-uC-650"/>
                             <constraint firstAttribute="trailingMargin" secondItem="GIj-ed-Mep" secondAttribute="trailing" constant="10" id="s8b-6n-G8n"/>
                             <constraint firstItem="hXj-6f-ai0" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="10" id="tRc-yT-LkQ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Et0-dE-Yop" secondAttribute="trailing" id="uCb-3G-5hZ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="8vw-eY-b1q" secondAttribute="trailing" constant="10" id="x9l-1T-gft"/>
                             <constraint firstItem="SXm-86-oSm" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="xNi-3g-2vC"/>
                         </constraints>

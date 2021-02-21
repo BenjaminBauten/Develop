@@ -69,4 +69,9 @@ class ViewController: UIViewController{
         UIPasteboard.general.string = encryptedText.text
     }
     
+    @IBAction func hideKeyboardOnClick(_ sender: Any) {
+        normalText.resignFirstResponder()
+        positionTextField.resignFirstResponder()
+    }
+    
 }
