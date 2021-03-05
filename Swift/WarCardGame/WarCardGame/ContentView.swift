@@ -83,8 +83,12 @@ struct ContentView: View {
                     self.randNum1 = 1
                     self.randNum2 = 1
                 }) {
-                    Image("startAgain")
+                    Text("Start again")
+                        .foregroundColor(.white)
                 }
+                .padding(14)
+                .background(Color.black)
+                .cornerRadius(10)
                 
             }
         }
