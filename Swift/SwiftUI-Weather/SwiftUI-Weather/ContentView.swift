@@ -16,20 +16,20 @@ struct ContentView: View {
             backgroundView(isNight: $isNight)
             VStack {
                 
-                cityTextView(cityName: "Cupertino, CA")
+                cityTextView(cityName: "Kevelaer")
                 
-                mainWeatherStatusView(imageName: isNight ? "moon.stars.fill" : "cloud.sun.fill", temperature: 76)
+                mainWeatherStatusView(imageName: isNight ? "moon.stars.fill" : "cloud.sun.fill")
                 
                 HStack (spacing: 20){
-                    WeatherDayView(dayOfWeek: "TUE", imageName: "cloud.sun.fill", temperature: 74)
+                    WeatherDayView(dayOfWeek: "TUE", imageName: "cloud.sun.fill", temperature: 24)
                     
-                    WeatherDayView(dayOfWeek: "WED", imageName: "sun.max.fill", temperature: 88)
+                    WeatherDayView(dayOfWeek: "WED", imageName: "sun.max.fill", temperature: 29)
                     
-                    WeatherDayView(dayOfWeek: "THU", imageName: "wind.snow", temperature: 55)
+                    WeatherDayView(dayOfWeek: "THU", imageName: "cloud.bolt.rain.fill", temperature: 17)
                     
-                    WeatherDayView(dayOfWeek: "FRI", imageName: "sunset.fill", temperature: 60)
+                    WeatherDayView(dayOfWeek: "FRI", imageName: "cloud.sun.fill", temperature: 19)
                     
-                    WeatherDayView(dayOfWeek: "SAT", imageName: "cloud.fog.fill", temperature: 25)
+                    WeatherDayView(dayOfWeek: "SAT", imageName: "cloud.fog.fill", temperature: 18)
                 }
                 Spacer()
                 
@@ -100,7 +100,7 @@ struct cityTextView: View {
 struct mainWeatherStatusView: View {
     
     var imageName: String
-    var temperature: Int
+    var temperature: Int = 26
     
     var body: some View{
         VStack(spacing: 10){
