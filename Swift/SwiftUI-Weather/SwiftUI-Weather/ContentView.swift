@@ -12,7 +12,7 @@ import Alamofire
 struct ContentView: View {
     
     @State private var isNight = false
-    @State private var currentTemperature : Float = 0
+    @State private var currentTemperature : Int = 1
     
     var body: some View {
         ZStack {
@@ -46,7 +46,7 @@ struct ContentView: View {
 //                        let y = json["base"].string
 //                        let z = json["name"].string
 //                        let a = json["main"]["humidity"].float
-                        currentTemperature = json["main"]["temp"].float!
+                        currentTemperature = Int((json["main"]["temp"].float!).rounded())
 //                        currentTemperature = temp
                         }
                         
@@ -114,7 +114,7 @@ struct cityTextView: View {
 
 struct mainWeatherStatusView: View {
     
-    @Binding var currentTemperature: Float
+    @Binding var currentTemperature: Int
     
     var imageName: String
     
