@@ -6,10 +6,13 @@
 //
 
 import SwiftUI
+import SwiftyJSON
+import Alamofire
 
 struct ContentView: View {
     
     @State private var isNight = false
+    @State private var currentTemperature : Float = 0
     
     var body: some View {
         ZStack {
@@ -18,7 +21,7 @@ struct ContentView: View {
                 
                 cityTextView(cityName: "Kevelaer")
                 
-                mainWeatherStatusView(imageName: isNight ? "moon.stars.fill" : "cloud.sun.fill")
+                mainWeatherStatusView(currentTemperature: $currentTemperature, imageName: isNight ? "moon.stars.fill" : "cloud.sun.fill")
                 
                 HStack (spacing: 20){
                     WeatherDayView(dayOfWeek: "TUE", imageName: "cloud.sun.fill", temperature: 24)
@@ -35,6 +38,18 @@ struct ContentView: View {
                 
                 Button{
                     isNight.toggle()
+                    AF.request("https://api.openweathermap.org/data/2.5/weather?q=Kevelaer&appid=1319104a3baa155478e1466e9bc73c7d&units=metric").responseJSON {
+                        response in
+                        
+                        let json = JSON(response.value!)
+                        print(json)
+//                        let y = json["base"].string
+//                        let z = json["name"].string
+//                        let a = json["main"]["humidity"].float
+                        currentTemperature = json["main"]["temp"].float!
+//                        currentTemperature = temp
+                        }
+                        
                 } label: {
                     WeatherButton(title: "Change Day Time", textColor: .blue, backgroundColor: .white)
                 }
@@ -99,8 +114,9 @@ struct cityTextView: View {
 
 struct mainWeatherStatusView: View {
     
+    @Binding var currentTemperature: Float
+    
     var imageName: String
-    var temperature: Int = 26
     
     var body: some View{
         VStack(spacing: 10){
@@ -109,7 +125,7 @@ struct mainWeatherStatusView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 180, height: 180)
-            Text("\(temperature)°")
+            Text("\(currentTemperature)°")
                 .font(.system(size: 70, weight: .medium))
                 .foregroundColor(.white)
         }

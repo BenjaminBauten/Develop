@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -46,7 +46,6 @@
 				FEF5A28A1D0D761414A8CBCD /* Pods-SwiftUI-Weather.debug.xcconfig */,
 				32225CDF044B15CD5AFC2353 /* Pods-SwiftUI-Weather.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
