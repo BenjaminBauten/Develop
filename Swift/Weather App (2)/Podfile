@@ -1,0 +1,5 @@
+target 'Weather App (2)' do
+  use_frameworks!
+  pod 'Alamofire'
+  pod 'SwiftyJSON'
+end
