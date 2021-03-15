@@ -37,7 +37,6 @@ struct ContentView: View {
                 Spacer()
                 
                 Button{
-                    isNight.toggle()
                     AF.request("https://api.openweathermap.org/data/2.5/weather?q=Kevelaer&appid=1319104a3baa155478e1466e9bc73c7d&units=metric").responseJSON {
                         response in
                         
@@ -51,9 +50,15 @@ struct ContentView: View {
                         }
                         
                 } label: {
-                    WeatherButton(title: "Change Day Time", textColor: .blue, backgroundColor: .white)
+                    WeatherButton(title: "Refresh Data", textColor: .blue, backgroundColor: .white)
                 }
                 
+                Spacer()
+                Button{
+                    isNight.toggle()
+                } label: {
+                    WeatherButton(title: "Change Day Time", textColor: .blue, backgroundColor: .white)
+                }
                 Spacer()
             }
         }
