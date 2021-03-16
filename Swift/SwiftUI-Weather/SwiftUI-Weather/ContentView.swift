@@ -43,10 +43,11 @@ struct ContentView: View {
                         let json = JSON(response.value!)
                         print(json)
 //                        let y = json["base"].string
-//                        let z = json["name"].string
+//                        var z = json["name"].string
 //                        let a = json["main"]["humidity"].float
+//                        var icon = json["weather"]["icon"].string
                         currentTemperature = Int((json["main"]["temp"].float!).rounded())
-//                        currentTemperature = temp
+//                        print(icon)
                         }
                         
                 } label: {
@@ -121,6 +122,20 @@ struct mainWeatherStatusView: View {
     
     @Binding var currentTemperature: Int
     
+    func refreshData(){
+        AF.request("https://api.openweathermap.org/data/2.5/weather?q=Kevelaer&appid=1319104a3baa155478e1466e9bc73c7d&units=metric").responseJSON {
+            response in
+
+            let json = JSON(response.value!)
+            print(json)
+//                        let y = json["base"].string
+//                        var z = json["name"].string
+//                        let a = json["main"]["humidity"].float
+//                        var icon = json["weather"]["icon"].string
+            currentTemperature = Int((json["main"]["temp"].float!).rounded())
+        }
+    }
+    
     var imageName: String
     
     var body: some View{
@@ -133,6 +148,7 @@ struct mainWeatherStatusView: View {
             Text("\(currentTemperature)°")
                 .font(.system(size: 70, weight: .medium))
                 .foregroundColor(.white)
+                .onAppear{refreshData()}
         }
         .padding(.bottom, 40)
     }
