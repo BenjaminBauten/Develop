@@ -45,9 +45,9 @@ struct ContentView: View {
 //                        let y = json["base"].string
 //                        var z = json["name"].string
 //                        let a = json["main"]["humidity"].float
-//                        var icon = json["weather"]["icon"].string
+                        let icon = json["weather"][0]["icon"].string!
                         currentTemperature = Int((json["main"]["temp"].float!).rounded())
-//                        print(icon)
+                        print(icon)
                         }
                         
                 } label: {
