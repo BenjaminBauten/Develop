@@ -12,8 +12,7 @@ import Alamofire
 struct ContentView: View {
     
     @State private var isNight = false
-    @State private var currentTemperature : Int = 1
-    @State private var symbolName : String = "cloud.sun.fill"
+    @ObservedObject private var weatherData = WeatherData()
     
     var body: some View {
         ZStack {
@@ -22,7 +21,7 @@ struct ContentView: View {
                 
                 cityTextView(cityName: "Kevelaer")
                 
-                mainWeatherStatusView(currentTemperature: $currentTemperature, symbolName: $symbolName)
+                mainWeatherStatusView(currentTemperature: $weatherData.currentTemperature, symbolName: $weatherData.symbolName)
                 
                 HStack (spacing: 20){
                     WeatherDayView(dayOfWeek: "TUE", imageName: "cloud.sun.fill", temperature: 24)
@@ -38,45 +37,7 @@ struct ContentView: View {
                 Spacer()
                 
                 Button{
-                    AF.request("https://api.openweathermap.org/data/2.5/weather?q=Kevelaer&appid=1319104a3baa155478e1466e9bc73c7d&units=metric").responseJSON {
-                        response in
-                        
-                        let json = JSON(response.value!)
-                        print(json)
-//                        let y = json["base"].string
-//                        var z = json["name"].string
-//                        let a = json["main"]["humidity"].float
-                        let icon = json["weather"][0]["icon"].string!
-                        currentTemperature = Int((json["main"]["temp"].float!).rounded())
-                        
-                        if icon == "03d" || icon == "03n" || icon == "04n" || icon == "04d" {
-                            symbolName = "cloud.fill"
-                        } else if icon == "09d" || icon == "09n"{
-                            symbolName = "cloud.heavyrain.fill"
-                        } else if icon == "13d" || icon == "13n"{
-                            symbolName = "cloud.snow.fill"
-                        } else if icon == "50d" || icon == "50n"{
-                            symbolName = "clod.fog.fill"
-                        } else if icon == "01d" {
-                            symbolName = "sun.max.fill"
-                        } else if icon == "01n"{
-                            symbolName = "moon.fill"
-                        } else if icon == "02d"{
-                            symbolName = "cloud.sun.fill"
-                        } else if icon == "02n"{
-                            symbolName = "cloud.moon.fill"
-                        } else if icon == "10d"{
-                            symbolName = "cloud.sun.rain.fill"
-                        } else if icon == "10n"{
-                            symbolName = "cloud.moon.rain.fill"
-                        } else if icon == "11d"{
-                            symbolName = "cloud.sun.bolt.fill"
-                        } else if icon == "11n"{
-                            symbolName = "cloud.moon.bolt.fill"
-                        } else{
-                            symbolName = "wifi.exclamationmark"
-                        }
-                    }
+                    weatherData.getWeatherData()
                         
                 } label: {
                     WeatherButton(title: "Refresh Data", textColor: .blue, backgroundColor: .white)
@@ -148,63 +109,22 @@ struct cityTextView: View {
 
 struct mainWeatherStatusView: View {
     
+    @ObservedObject private var weatherData = WeatherData()
     @Binding var currentTemperature: Int
     @Binding var symbolName: String
-    
-    func refreshData(){
-        AF.request("https://api.openweathermap.org/data/2.5/weather?q=Kevelaer&appid=1319104a3baa155478e1466e9bc73c7d&units=metric").responseJSON {
-            response in
-            
-            let json = JSON(response.value!)
-            print(json)
-//                        let y = json["base"].string
-//                        var z = json["name"].string
-//                        let a = json["main"]["humidity"].float
-            let icon = json["weather"][0]["icon"].string!
-            currentTemperature = Int((json["main"]["temp"].float!).rounded())
-            
-            if icon == "03d" || icon == "03n" || icon == "04n" || icon == "04d" {
-                symbolName = "cloud.fill"
-            } else if icon == "09d" || icon == "09n"{
-                symbolName = "cloud.heavyrain.fill"
-            } else if icon == "13d" || icon == "13n"{
-                symbolName = "cloud.snow.fill"
-            } else if icon == "50d" || icon == "50n"{
-                symbolName = "clod.fog.fill"
-            } else if icon == "01d" {
-                symbolName = "sun.max.fill"
-            } else if icon == "01n"{
-                symbolName = "moon.fill"
-            } else if icon == "02d"{
-                symbolName = "cloud.sun.fill"
-            } else if icon == "02n"{
-                symbolName = "cloud.moon.fill"
-            } else if icon == "10d"{
-                symbolName = "cloud.sun.rain.fill"
-            } else if icon == "10n"{
-                symbolName = "cloud.moon.rain.fill"
-            } else if icon == "11d"{
-                symbolName = "cloud.sun.bolt.fill"
-            } else if icon == "11n"{
-                symbolName = "cloud.moon.bolt.fill"
-            } else{
-                symbolName = "wifi.exclamationmark"
-            }
-        }
-    }
     
     
     var body: some View{
         VStack(spacing: 10){
-            Image(systemName: symbolName)
+            Image(systemName: weatherData.symbolName)
                 .renderingMode(.original)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 180, height: 180)
-            Text("\(currentTemperature)°")
+            Text("\(weatherData.currentTemperature)°")
                 .font(.system(size: 70, weight: .medium))
                 .foregroundColor(.white)
-                .onAppear{refreshData()}
+                .onAppear{weatherData.getWeatherData()}
         }
         .padding(.bottom, 40)
     }
