@@ -19,7 +19,7 @@ struct ContentView: View {
             backgroundView(isNight: $isNight)
             VStack {
                 
-                cityTextView(cityName: "Kevelaer")
+                cityTextView(cityName: weatherData.cityName)
                 mainWeatherStatusView(weatherDataInScope: self.weatherData, currentTemperature: weatherData.currentTemperatureString, symbolName: weatherData.symbolName)
                 
                 HStack (spacing: 20){
