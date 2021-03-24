@@ -11,8 +11,8 @@ import Alamofire
 
 struct ContentView: View {
     
-    @State private var isNight = false
     @ObservedObject private var weatherData = WeatherData()
+    @State private var isNight = false
     
     var body: some View {
         ZStack {
@@ -20,8 +20,7 @@ struct ContentView: View {
             VStack {
                 
                 cityTextView(cityName: "Kevelaer")
-                
-                mainWeatherStatusView(currentTemperature: $weatherData.currentTemperature, symbolName: $weatherData.symbolName)
+                mainWeatherStatusView(weatherDataInScope: self.weatherData, currentTemperature: weatherData.currentTemperatureString, symbolName: weatherData.symbolName)
                 
                 HStack (spacing: 20){
                     WeatherDayView(dayOfWeek: "TUE", imageName: "cloud.sun.fill", temperature: 24)
@@ -109,22 +108,21 @@ struct cityTextView: View {
 
 struct mainWeatherStatusView: View {
     
-    @ObservedObject private var weatherData = WeatherData()
-    @Binding var currentTemperature: Int
-    @Binding var symbolName: String
-    
+    var weatherDataInScope: WeatherData
+    var currentTemperature: String
+    var symbolName: String
     
     var body: some View{
         VStack(spacing: 10){
-            Image(systemName: weatherData.symbolName)
+            Image(systemName: symbolName)
                 .renderingMode(.original)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 180, height: 180)
-            Text("\(weatherData.currentTemperature)°")
+            Text(currentTemperature)
                 .font(.system(size: 70, weight: .medium))
                 .foregroundColor(.white)
-                .onAppear{weatherData.getWeatherData()}
+                .onAppear{weatherDataInScope.getWeatherData()}
         }
         .padding(.bottom, 40)
     }

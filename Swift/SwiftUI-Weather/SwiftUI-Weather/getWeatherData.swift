@@ -12,19 +12,19 @@ import Alamofire
 class WeatherData: ObservableObject {
     
     @Published var symbolName: String = ""
-    @Published var currentTemperature: Int = 1
+    @Published var currentTemperatureString: String = "--"
     
     func getWeatherData(){
         AF.request("https://api.openweathermap.org/data/2.5/weather?q=Kevelaer&appid=1319104a3baa155478e1466e9bc73c7d&units=metric").responseJSON {
             response in
-            
+
             let json = JSON(response.value!)
             print(json)
 //                        let y = json["base"].string
 //                        var z = json["name"].string
 //                        let a = json["main"]["humidity"].float
             let icon = json["weather"][0]["icon"].string!
-            self.currentTemperature = Int((json["main"]["temp"].float!).rounded())
+            self.currentTemperatureString = String(Int((json["main"]["temp"].float!).rounded())) + "°"
             
             if icon == "03d" || icon == "03n" || icon == "04n" || icon == "04d" {
                 self.symbolName = "cloud.fill"
