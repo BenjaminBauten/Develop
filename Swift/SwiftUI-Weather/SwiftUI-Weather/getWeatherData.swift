@@ -15,6 +15,7 @@ class WeatherData: ObservableObject {
     @Published var currentTemperatureString: String = "--"
     @Published var cityName: String = ""
     @Published var weatherDescription: String = ""
+    @Published var isNight = false
     
     func getWeatherData(){
         AF.request("https://api.openweathermap.org/data/2.5/weather?q=Kevelaer&appid=1319104a3baa155478e1466e9bc73c7d&units=metric").responseJSON {
@@ -26,7 +27,17 @@ class WeatherData: ObservableObject {
             self.currentTemperatureString = String(Int((json["main"]["temp"].float!).rounded())) + "°"
             self.cityName = json["name"].string!
             self.weatherDescription = json["weather"][0]["main"].string ?? "not found"
-            
+            let sunriseTime = json["sys"]["sunrise"].int!
+            let sunsetTime = json["sys"]["sunset"].int!
+            let currentTime = Int(NSDate().timeIntervalSince1970)
+            print("current time: " +  String(currentTime))
+            print("sunrise time: " + String(sunriseTime))
+            print(" sunset time: " + String(sunsetTime))
+            if currentTime > sunriseTime && currentTime < sunsetTime{
+                self.isNight = false
+            } else{
+                self.isNight = true
+            }
             
             if icon == "03d" || icon == "03n" || icon == "04n" || icon == "04d" {
                 self.symbolName = "cloud.fill"

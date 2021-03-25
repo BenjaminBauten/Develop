@@ -12,11 +12,10 @@ import Alamofire
 struct ContentView: View {
     
     @ObservedObject private var weatherData = WeatherData()
-    @State private var isNight = false
     
     var body: some View {
         ZStack {
-            backgroundView(isNight: $isNight)
+            backgroundView(isNight: weatherData.isNight)
             VStack {
                 
                 cityTextView(cityName: weatherData.cityName)
@@ -42,12 +41,12 @@ struct ContentView: View {
                     WeatherButton(title: "Refresh Data", textColor: .blue, backgroundColor: .white)
                 }
                 
-                Spacer()
-                Button{
-                    isNight.toggle()
-                } label: {
-                    WeatherButton(title: "Change Day Time", textColor: .blue, backgroundColor: .white)
-                }
+//                Spacer()
+//                Button{
+//                    isNight.toggle()
+//                } label: {
+//                    WeatherButton(title: "Change Day Time", textColor: .blue, backgroundColor: .white)
+//                }
                 Spacer()
             }
         }
@@ -86,8 +85,7 @@ struct WeatherDayView: View {
 
 struct backgroundView: View {
     
-    @Binding var isNight: Bool
-    
+    var isNight: Bool
     var body: some View {
         LinearGradient(gradient: Gradient(colors: [isNight ? .black : .blue, isNight ? .gray : Color("lightBlue")]), startPoint: .topLeading, endPoint: .bottomTrailing)
             .edgesIgnoringSafeArea(.all)
