@@ -16,6 +16,8 @@ class WeatherData: ObservableObject {
     @Published var cityName: String = ""
     @Published var weatherDescription: String = ""
     @Published var isNight = false
+    @Published var sunriseTime: String = ""
+    @Published var sunsetTime: String = ""
     
     func getWeatherData(){
         AF.request("https://api.openweathermap.org/data/2.5/weather?q=Kevelaer&appid=1319104a3baa155478e1466e9bc73c7d&units=metric").responseJSON {
@@ -30,14 +32,10 @@ class WeatherData: ObservableObject {
             let sunriseTime = json["sys"]["sunrise"].int!
             let sunsetTime = json["sys"]["sunset"].int!
             let currentTime = Int(NSDate().timeIntervalSince1970)
-            print("current time: " +  String(currentTime))
-            print("sunrise time: " + String(sunriseTime))
-            print(" sunset time: " + String(sunsetTime))
-            if currentTime > sunriseTime && currentTime < sunsetTime{
-                self.isNight = false
-            } else{
-                self.isNight = true
-            }
+            
+            self.sunriseTime = self.convertUnixTimeToString(unixTime: Double(sunriseTime))
+            self.sunsetTime = self.convertUnixTimeToString(unixTime: Double(sunsetTime))
+            self.isNight = !(currentTime > sunriseTime && currentTime < sunsetTime)
             
             if icon == "03d" || icon == "03n" || icon == "04n" || icon == "04d" {
                 self.symbolName = "cloud.fill"
@@ -67,6 +65,15 @@ class WeatherData: ObservableObject {
                 self.symbolName = "wifi.exclamationmark"
             }
         }
+    }
+    func convertUnixTimeToString(unixTime: Double) -> String {
+        let date = Date(timeIntervalSince1970: unixTime)
+        let dateFormatter = DateFormatter()
+        let timezone = TimeZone.current.abbreviation() ?? "CET"
+        dateFormatter.timeZone = TimeZone(abbreviation: timezone)
+        dateFormatter.locale = NSLocale.current
+        dateFormatter.dateFormat = "HH:mm"
+        return dateFormatter.string(from: date)
     }
 }
 

@@ -19,7 +19,7 @@ struct ContentView: View {
             VStack {
                 
                 cityTextView(cityName: weatherData.cityName)
-                mainWeatherStatusView(weatherDataInScope: self.weatherData, currentTemperature: weatherData.currentTemperatureString, symbolName: weatherData.symbolName, weatherDescription: weatherData.weatherDescription)
+                mainWeatherStatusView(weatherDataInScope: self.weatherData, currentTemperature: weatherData.currentTemperatureString, symbolName: weatherData.symbolName, weatherDescription: weatherData.weatherDescription, sunriseTime: weatherData.sunriseTime, sunsetTime: weatherData.sunsetTime)
                 
                 HStack (spacing: 20){
                     WeatherDayView(dayOfWeek: "TUE", imageName: "cloud.sun.fill", temperature: 24)
@@ -110,6 +110,8 @@ struct mainWeatherStatusView: View {
     var currentTemperature: String
     var symbolName: String
     var weatherDescription: String
+    var sunriseTime: String
+    var sunsetTime: String
     
     var body: some View{
         VStack(spacing: 10){
@@ -125,12 +127,12 @@ struct mainWeatherStatusView: View {
                 Image(systemName: "sunrise")
                     .foregroundColor(.white)
                     .font(.system(size: 16, weight: .medium))
-                Text("07:23")
+                Text(sunriseTime)
                     .foregroundColor(.white)
                     .font(.system(size: 16, weight: .medium))
                 Image(systemName: "sunset")
                     .foregroundColor(.white)
-                Text("18:44")
+                Text(sunsetTime)
                     .foregroundColor(.white)
             }
             Text(currentTemperature)
