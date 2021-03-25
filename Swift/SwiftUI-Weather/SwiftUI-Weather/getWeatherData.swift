@@ -14,9 +14,10 @@ class WeatherData: ObservableObject {
     @Published var symbolName: String = ""
     @Published var currentTemperatureString: String = "--"
     @Published var cityName: String = ""
+    @Published var weatherDescription: String = ""
     
     func getWeatherData(){
-        AF.request("https://api.openweathermap.org/data/2.5/weather?q=Witley&appid=1319104a3baa155478e1466e9bc73c7d&units=metric").responseJSON {
+        AF.request("https://api.openweathermap.org/data/2.5/weather?q=Kevelaer&appid=1319104a3baa155478e1466e9bc73c7d&units=metric").responseJSON {
             response in
 
             let json = JSON(response.value!)
@@ -24,6 +25,8 @@ class WeatherData: ObservableObject {
             let icon = json["weather"][0]["icon"].string!
             self.currentTemperatureString = String(Int((json["main"]["temp"].float!).rounded())) + "°"
             self.cityName = json["name"].string!
+            self.weatherDescription = json["weather"][0]["main"].string ?? "not found"
+            
             
             if icon == "03d" || icon == "03n" || icon == "04n" || icon == "04d" {
                 self.symbolName = "cloud.fill"
