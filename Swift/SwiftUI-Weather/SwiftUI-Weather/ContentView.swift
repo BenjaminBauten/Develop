@@ -127,7 +127,7 @@ struct mainWeatherStatusView: View {
                 .frame(width: 160, height: 160)
             HStack{
                 Spacer()
-                VStack{
+                VStack(alignment: .leading){
                     HStack{
                         Image(systemName: "sunrise")
                             .foregroundColor(.white)
@@ -144,21 +144,21 @@ struct mainWeatherStatusView: View {
                             .foregroundColor(.white)
                             .font(.system(size: 16, weight: .medium))
                     }
-                }
+                }.frame(width: 100, height: 50, alignment: .center)
                 Spacer()
                 Text(currentTemperature)
                     .font(.system(size: 70, weight: .medium))
                     .foregroundColor(.white)
                     .onAppear{weatherDataInScope.getWeatherData()}
                 Spacer()
-                VStack{
+                VStack(alignment: .leading){
                     Text(lowestTemperature)
                         .font(.system(size: 16, weight: .medium))
                         .foregroundColor(.white)
                     Text(highestTemperature)
                         .font(.system(size: 16, weight: .medium))
                         .foregroundColor(.white)
-                }
+                }.frame(width: 100, height: 50, alignment: .center)
                 Spacer()
             }
         }
