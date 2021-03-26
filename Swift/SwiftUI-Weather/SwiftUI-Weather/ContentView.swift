@@ -19,7 +19,7 @@ struct ContentView: View {
             VStack {
                 
                 cityTextView(cityName: weatherData.cityName)
-                mainWeatherStatusView(weatherDataInScope: self.weatherData, currentTemperature: weatherData.currentTemperatureString, symbolName: weatherData.symbolName, weatherDescription: weatherData.weatherDescription, sunriseTime: weatherData.sunriseTime, sunsetTime: weatherData.sunsetTime)
+                mainWeatherStatusView(weatherDataInScope: self.weatherData, currentTemperature: weatherData.currentTemperatureString, symbolName: weatherData.symbolName, weatherDescription: weatherData.weatherDescription, sunriseTime: weatherData.sunriseTime, sunsetTime: weatherData.sunsetTime, highestTemperature: weatherData.highestTemperature, lowestTemperature: weatherData.lowestTemperature)
                 
                 HStack (spacing: 20){
                     WeatherDayView(dayOfWeek: "TUE", imageName: "cloud.sun.fill", temperature: 24)
@@ -112,6 +112,8 @@ struct mainWeatherStatusView: View {
     var weatherDescription: String
     var sunriseTime: String
     var sunsetTime: String
+    var highestTemperature: String
+    var lowestTemperature: String
     
     var body: some View{
         VStack(spacing: 10){
@@ -124,21 +126,41 @@ struct mainWeatherStatusView: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 160, height: 160)
             HStack{
-                Image(systemName: "sunrise")
+                Spacer()
+                VStack{
+                    HStack{
+                        Image(systemName: "sunrise")
+                            .foregroundColor(.white)
+                            .font(.system(size: 16, weight: .medium))
+                        Text(sunriseTime)
+                            .foregroundColor(.white)
+                            .font(.system(size: 16, weight: .medium))
+                    }
+                    HStack{
+                        Image(systemName: "sunset")
+                            .foregroundColor(.white)
+                            .font(.system(size: 16, weight: .medium))
+                        Text(sunsetTime)
+                            .foregroundColor(.white)
+                            .font(.system(size: 16, weight: .medium))
+                    }
+                }
+                Spacer()
+                Text(currentTemperature)
+                    .font(.system(size: 70, weight: .medium))
                     .foregroundColor(.white)
-                    .font(.system(size: 16, weight: .medium))
-                Text(sunriseTime)
-                    .foregroundColor(.white)
-                    .font(.system(size: 16, weight: .medium))
-                Image(systemName: "sunset")
-                    .foregroundColor(.white)
-                Text(sunsetTime)
-                    .foregroundColor(.white)
+                    .onAppear{weatherDataInScope.getWeatherData()}
+                Spacer()
+                VStack{
+                    Text(lowestTemperature)
+                        .font(.system(size: 16, weight: .medium))
+                        .foregroundColor(.white)
+                    Text(highestTemperature)
+                        .font(.system(size: 16, weight: .medium))
+                        .foregroundColor(.white)
+                }
+                Spacer()
             }
-            Text(currentTemperature)
-                .font(.system(size: 70, weight: .medium))
-                .foregroundColor(.white)
-                .onAppear{weatherDataInScope.getWeatherData()}
         }
         .padding(.bottom, 40)
     }

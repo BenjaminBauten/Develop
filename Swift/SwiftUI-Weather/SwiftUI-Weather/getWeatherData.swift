@@ -18,6 +18,8 @@ class WeatherData: ObservableObject {
     @Published var isNight = false
     @Published var sunriseTime: String = ""
     @Published var sunsetTime: String = ""
+    @Published var highestTemperature: String = "--"
+    @Published var lowestTemperature: String = "--"
     
     func getWeatherData(){
         AF.request("https://api.openweathermap.org/data/2.5/weather?q=Kevelaer&appid=1319104a3baa155478e1466e9bc73c7d&units=metric").responseJSON {
@@ -28,10 +30,12 @@ class WeatherData: ObservableObject {
             let icon = json["weather"][0]["icon"].string!
             self.currentTemperatureString = String(Int((json["main"]["temp"].float!).rounded())) + "°"
             self.cityName = json["name"].string!
-            self.weatherDescription = json["weather"][0]["main"].string ?? "not found"
+            self.weatherDescription = json["weather"][0]["description"].string ?? "not found"
             let sunriseTime = json["sys"]["sunrise"].int!
             let sunsetTime = json["sys"]["sunset"].int!
             let currentTime = Int(NSDate().timeIntervalSince1970)
+            self.highestTemperature = "H:" + String(Int((json["main"]["temp_max"].float!).rounded())) + "°"
+            self.lowestTemperature = "L:" + String(Int((json["main"]["temp_min"].float!).rounded())) + "°"
             
             self.sunriseTime = self.convertUnixTimeToString(unixTime: Double(sunriseTime))
             self.sunsetTime = self.convertUnixTimeToString(unixTime: Double(sunsetTime))
