@@ -21,8 +21,11 @@ class WeatherData: ObservableObject {
     @Published var highestTemperature: String = "--"
     @Published var lowestTemperature: String = "--"
     
+    @Published var forecastTemperature: [Int] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    @Published var forecastIcon: [String] = ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-",]
+    @Published var forecastTime: [String] = ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-",]
     func getWeatherData(){
-        AF.request("https://api.openweathermap.org/data/2.5/weather?q=Kevelaer&appid=1319104a3baa155478e1466e9bc73c7d&units=metric").responseJSON {
+        AF.request("https://api.openweathermap.org/data/2.5/weather?q=Barcelona&lang=en&appid=1319104a3baa155478e1466e9bc73c7d&units=metric").responseJSON {
             response in
 
             let json = JSON(response.value!)
@@ -40,36 +43,39 @@ class WeatherData: ObservableObject {
             self.sunriseTime = self.convertUnixTimeToString(unixTime: Double(sunriseTime))
             self.sunsetTime = self.convertUnixTimeToString(unixTime: Double(sunsetTime))
             self.isNight = !(currentTime > sunriseTime && currentTime < sunsetTime)
-            
-            if icon == "03d" || icon == "03n" || icon == "04n" || icon == "04d" {
-                self.symbolName = "cloud.fill"
-            } else if icon == "09d" || icon == "09n"{
-                self.symbolName = "cloud.heavyrain.fill"
-            } else if icon == "13d" || icon == "13n"{
-                self.symbolName = "cloud.snow.fill"
-            } else if icon == "50d" || icon == "50n"{
-                self.symbolName = "clod.fog.fill"
-            } else if icon == "01d" {
-                self.symbolName = "sun.max.fill"
-            } else if icon == "01n"{
-                self.symbolName = "moon.fill"
-            } else if icon == "02d"{
-                self.symbolName = "cloud.sun.fill"
-            } else if icon == "02n"{
-                self.symbolName = "cloud.moon.fill"
-            } else if icon == "10d"{
-                self.symbolName = "cloud.sun.rain.fill"
-            } else if icon == "10n"{
-                self.symbolName = "cloud.moon.rain.fill"
-            } else if icon == "11d"{
-                self.symbolName = "cloud.sun.bolt.fill"
-            } else if icon == "11n"{
-                self.symbolName = "cloud.moon.bolt.fill"
-            } else{
-                self.symbolName = "wifi.exclamationmark"
-            }
+            self.symbolName = self.convertSymbolName(icon: icon)
         }
     }
+    
+    func hourlyForecastWeatherData(){
+        AF.request("https://api.openweathermap.org/data/2.5/forecast?q=Barcelona&units=metric&appid=ca929c7fbdc1623d4837fb863f9853e0").responseJSON {
+            response in
+            
+            let json = JSON(response.value!)
+            print(json)
+            let list = json["list"]
+            var icons = Array<String>()
+            var time = Array<String>()
+            var temperature = Array<Int>()
+            
+            
+            for counter in 0...15 {
+                
+                icons += [self.convertSymbolName(icon: list[counter]["weather"][0]["icon"].string!)]
+                time += [self.convertUnixTimeToString(unixTime: Double(list[counter]["dt"].int!))]
+                temperature += [Int((list[counter]["main"]["temp_max"].float!).rounded())]
+                
+            }
+            print(icons)
+            print(time)
+            print(temperature)
+            self.forecastIcon = icons
+            self.forecastTime = time
+            self.forecastTemperature = temperature
+        }
+    }
+       
+    
     func convertUnixTimeToString(unixTime: Double) -> String {
         let date = Date(timeIntervalSince1970: unixTime)
         let dateFormatter = DateFormatter()
@@ -79,6 +85,36 @@ class WeatherData: ObservableObject {
         dateFormatter.dateFormat = "HH:mm"
         return dateFormatter.string(from: date)
     }
+    
+    func convertSymbolName(icon: String) -> String{
+        var symbolName: String = ""
+        if icon == "03d" || icon == "03n" || icon == "04n" || icon == "04d" {
+            symbolName = "cloud.fill"
+        } else if icon == "09d" || icon == "09n"{
+            symbolName = "cloud.heavyrain.fill"
+        } else if icon == "13d" || icon == "13n"{
+            symbolName = "cloud.snow.fill"
+        } else if icon == "50d" || icon == "50n"{
+            symbolName = "clod.fog.fill"
+        } else if icon == "01d" {
+            symbolName = "sun.max.fill"
+        } else if icon == "01n"{
+            symbolName = "moon.fill"
+        } else if icon == "02d"{
+            symbolName = "cloud.sun.fill"
+        } else if icon == "02n"{
+            symbolName = "cloud.moon.fill"
+        } else if icon == "10d"{
+            symbolName = "cloud.sun.rain.fill"
+        } else if icon == "10n"{
+            symbolName = "cloud.moon.rain.fill"
+        } else if icon == "11d"{
+            symbolName = "cloud.sun.bolt.fill"
+        } else if icon == "11n"{
+            symbolName = "cloud.moon.bolt.fill"
+        } else{
+            symbolName = "wifi.exclamationmark"
+        }
+        return symbolName
+    }
 }
-
-
