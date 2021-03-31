@@ -20,28 +20,11 @@ struct ContentView: View {
                 
                 cityTextView(cityName: weatherData.cityName)
                 mainWeatherStatusView(weatherDataInScope: self.weatherData, currentTemperature: weatherData.currentTemperatureString, symbolName: weatherData.symbolName, weatherDescription: weatherData.weatherDescription, sunriseTime: weatherData.sunriseTime, sunsetTime: weatherData.sunsetTime, highestTemperature: weatherData.highestTemperature, lowestTemperature: weatherData.lowestTemperature)
-                
                 ScrollView(.horizontal){
                     HStack (spacing: 20){
-                        WeatherDayView(dayOfWeek: weatherData.forecastTime[0], imageName: weatherData.forecastIcon[0], temperature: weatherData.forecastTemperature[0])
-                        WeatherDayView(dayOfWeek: weatherData.forecastTime[1], imageName: weatherData.forecastIcon[1], temperature: weatherData.forecastTemperature[1])
-                        WeatherDayView(dayOfWeek: weatherData.forecastTime[2], imageName: weatherData.forecastIcon[2], temperature: weatherData.forecastTemperature[2])
-                        WeatherDayView(dayOfWeek: weatherData.forecastTime[3], imageName: weatherData.forecastIcon[3], temperature: weatherData.forecastTemperature[3])
-                        WeatherDayView(dayOfWeek: weatherData.forecastTime[4], imageName: weatherData.forecastIcon[4], temperature: weatherData.forecastTemperature[4])
-                        WeatherDayView(dayOfWeek: weatherData.forecastTime[5], imageName: weatherData.forecastIcon[5], temperature: weatherData.forecastTemperature[5])
-                        WeatherDayView(dayOfWeek: weatherData.forecastTime[6], imageName: weatherData.forecastIcon[6], temperature: weatherData.forecastTemperature[6])
-                        Group{
-                            WeatherDayView(dayOfWeek: weatherData.forecastTime[7], imageName: weatherData.forecastIcon[7], temperature: weatherData.forecastTemperature[7])
-                            WeatherDayView(dayOfWeek: weatherData.forecastTime[8], imageName: weatherData.forecastIcon[8], temperature: weatherData.forecastTemperature[8])
-                            WeatherDayView(dayOfWeek: weatherData.forecastTime[9], imageName: weatherData.forecastIcon[9], temperature: weatherData.forecastTemperature[9])
-                            WeatherDayView(dayOfWeek: weatherData.forecastTime[10], imageName: weatherData.forecastIcon[10], temperature: weatherData.forecastTemperature[10])
-                            Group{
-                                WeatherDayView(dayOfWeek: weatherData.forecastTime[11], imageName: weatherData.forecastIcon[11], temperature: weatherData.forecastTemperature[11])
-                                WeatherDayView(dayOfWeek: weatherData.forecastTime[12], imageName: weatherData.forecastIcon[12], temperature: weatherData.forecastTemperature[12])
-                                WeatherDayView(dayOfWeek: weatherData.forecastTime[13], imageName: weatherData.forecastIcon[13], temperature: weatherData.forecastTemperature[13])
-                                WeatherDayView(dayOfWeek: weatherData.forecastTime[14], imageName: weatherData.forecastIcon[14], temperature: weatherData.forecastTemperature[14])
-                                WeatherDayView(dayOfWeek: weatherData.forecastTime[15], imageName: weatherData.forecastIcon[15], temperature: weatherData.forecastTemperature[15])
-                            }
+                        
+                        ForEach(weatherData.forecastTime.indices){ i in
+                            WeatherDayView(dayOfWeek: weatherData.forecastTime[i], imageName: weatherData.forecastIcon[i], temperature: weatherData.forecastTemperature[i])
                         }
                     }
                 }
@@ -81,7 +64,7 @@ struct WeatherDayView: View {
                 .renderingMode(.original)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 40, height: 40)
+                .frame(height: 25)
             Text("\(temperature)°")
                 .font(.system(size: 28, weight: .medium))
                 .foregroundColor(.white)
@@ -131,7 +114,7 @@ struct mainWeatherStatusView: View {
                 .renderingMode(.original)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 160, height: 160)
+                .frame(height: 140)
             HStack{
                 Spacer()
                 VStack(alignment: .leading){

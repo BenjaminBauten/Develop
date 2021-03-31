@@ -24,8 +24,12 @@ class WeatherData: ObservableObject {
     @Published var forecastTemperature: [Int] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     @Published var forecastIcon: [String] = ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-",]
     @Published var forecastTime: [String] = ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-",]
+    
+    @State var cityNameInScope:String = "Kevelaer"
+    @State var language:String = "de"
+    
     func getWeatherData(){
-        AF.request("https://api.openweathermap.org/data/2.5/weather?q=Barcelona&lang=en&appid=1319104a3baa155478e1466e9bc73c7d&units=metric").responseJSON {
+        AF.request("https://api.openweathermap.org/data/2.5/weather?q=" + self.cityNameInScope + "&lang=" + self.language + "&appid=1319104a3baa155478e1466e9bc73c7d&units=metric").responseJSON {
             response in
 
             let json = JSON(response.value!)
@@ -48,7 +52,7 @@ class WeatherData: ObservableObject {
     }
     
     func hourlyForecastWeatherData(){
-        AF.request("https://api.openweathermap.org/data/2.5/forecast?q=Barcelona&units=metric&appid=ca929c7fbdc1623d4837fb863f9853e0").responseJSON {
+        AF.request("https://api.openweathermap.org/data/2.5/forecast?q=" + self.cityNameInScope + "&units=metric&appid=ca929c7fbdc1623d4837fb863f9853e0").responseJSON {
             response in
             
             let json = JSON(response.value!)
@@ -88,7 +92,7 @@ class WeatherData: ObservableObject {
     
     func convertSymbolName(icon: String) -> String{
         var symbolName: String = ""
-        if icon == "03d" || icon == "03n" || icon == "04n" || icon == "04d" {
+        if icon == "04n" || icon == "04d" {
             symbolName = "cloud.fill"
         } else if icon == "09d" || icon == "09n"{
             symbolName = "cloud.heavyrain.fill"
@@ -99,10 +103,10 @@ class WeatherData: ObservableObject {
         } else if icon == "01d" {
             symbolName = "sun.max.fill"
         } else if icon == "01n"{
-            symbolName = "moon.fill"
-        } else if icon == "02d"{
+            symbolName = "moon.stars.fill"
+        } else if icon == "02d" || icon == "03d"{
             symbolName = "cloud.sun.fill"
-        } else if icon == "02n"{
+        } else if icon == "02n" || icon == "03n"{
             symbolName = "cloud.moon.fill"
         } else if icon == "10d"{
             symbolName = "cloud.sun.rain.fill"
