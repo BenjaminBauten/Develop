@@ -35,9 +35,11 @@ struct ContentView: View {
                     weatherData.hourlyForecastWeatherData()
                         
                 } label: {
-                    WeatherButton(title: "Refresh Data", textColor: .blue, backgroundColor: .white)
+                    Image(systemName: "arrow.counterclockwise")
+                        .resizable()
+                        .foregroundColor(.white)
+                        .frame(width: 25, height: 27)
                 }
-                Spacer()
             }
         }
     }

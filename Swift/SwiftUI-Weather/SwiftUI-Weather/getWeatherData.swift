@@ -25,7 +25,7 @@ class WeatherData: ObservableObject {
     @Published var forecastIcon: [String] = ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-",]
     @Published var forecastTime: [String] = ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-",]
     
-    @State var cityNameInScope:String = "Kevelaer"
+    @State var cityNameInScope:String = "Palma"
     @State var language:String = "de"
     
     func getWeatherData(){
