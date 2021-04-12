@@ -25,8 +25,13 @@ class WeatherData: ObservableObject {
     @Published var forecastIcon: [String] = ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-",]
     @Published var forecastTime: [String] = ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", "-",]
     
-    @State var cityNameInScope:String = "Palma"
-    @State var language:String = "de"
+    @Published var humidity: String = ""
+    @Published var feelsLike: String = ""
+    @Published var pressure: String = ""
+    @Published var windSpeed: String = ""
+    
+    @State var cityNameInScope:String = "Kevelaer"
+    @State var language:String = "en"
     
     func getWeatherData(){
         AF.request("https://api.openweathermap.org/data/2.5/weather?q=" + self.cityNameInScope + "&lang=" + self.language + "&appid=1319104a3baa155478e1466e9bc73c7d&units=metric").responseJSON {
@@ -48,6 +53,11 @@ class WeatherData: ObservableObject {
             self.sunsetTime = self.convertUnixTimeToString(unixTime: Double(sunsetTime))
             self.isNight = !(currentTime > sunriseTime && currentTime < sunsetTime)
             self.symbolName = self.convertSymbolName(icon: icon)
+            
+            self.humidity = String(json["main"]["humidity"].int!) + " %"
+            self.windSpeed = String((json["wind"]["speed"].float!).rounded()) + " km/h"
+            self.pressure = String(json["main"]["pressure"].int!) + " hPa"
+            self.feelsLike = String(Int((json["main"]["feels_like"].float!).rounded())) + "°"
         }
     }
     
@@ -56,7 +66,7 @@ class WeatherData: ObservableObject {
             response in
             
             let json = JSON(response.value!)
-            print(json)
+//            print(json)
             let list = json["list"]
             var icons = Array<String>()
             var time = Array<String>()

@@ -35,6 +35,26 @@ struct ContentView: View {
                 Divider()
                     .frame(height: 1)
                     .background(Color.white)
+                VStack{
+                    HStack{
+                        informationView(variableName: "HUMIDITY", variable: weatherData.humidity)
+                        Spacer()
+                        informationView(variableName: "FEELS LIKE", variable: weatherData.feelsLike)
+                        Spacer()
+                    }
+                    Divider()
+                        .frame(height: 1.0)
+                        .background(Color.white)
+                    HStack{
+                        informationView(variableName: "PRESSURE", variable: weatherData.pressure)
+                        Spacer()
+                        informationView(variableName: "WIND", variable: weatherData.windSpeed)
+                        Spacer()
+                    }
+                    Divider()
+                        .frame(height: 1.0)
+                        .background(Color.white)
+                }
                 
                 Spacer()
                 
@@ -164,5 +184,25 @@ struct mainWeatherStatusView: View {
             }
         }
         .padding(.bottom, 40)
+    }
+}
+struct informationView: View {
+    
+    var variableName: String
+    var variable: String
+    
+    var body: some View {
+        VStack(alignment: .leading){
+            Text(variableName)
+                .font(.system(size: 16, weight: .medium, design: .default))
+                .foregroundColor(.gray)
+                .padding()
+                .frame(height: 20)
+            Text(variable)
+                .font(.system(size: 20, weight: .medium, design: .default))
+                .foregroundColor(.white)
+                .padding()
+                .frame(height: 20)
+        }.frame(width: 130)
     }
 }
