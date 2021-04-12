@@ -63,10 +63,10 @@ struct ContentView: View {
                     weatherData.hourlyForecastWeatherData()
                         
                 } label: {
-                    Image(systemName: "arrow.counterclockwise")
+                    Image(systemName: "arrow.triangle.2.circlepath")
                         .resizable()
                         .foregroundColor(.white)
-                        .frame(width: 25, height: 27)
+                        .frame(width: 30, height: 25)
                 }
             }
         }
@@ -203,6 +203,6 @@ struct informationView: View {
                 .foregroundColor(.white)
                 .padding()
                 .frame(height: 20)
-        }.frame(width: 130)
+        }.frame(width: 130, alignment: .leading)
     }
 }

@@ -55,7 +55,7 @@ class WeatherData: ObservableObject {
             self.symbolName = self.convertSymbolName(icon: icon)
             
             self.humidity = String(json["main"]["humidity"].int!) + " %"
-            self.windSpeed = String((json["wind"]["speed"].float!).rounded()) + " km/h"
+            self.windSpeed = String(Int((json["wind"]["speed"].float!).rounded())) + " km/h"
             self.pressure = String(json["main"]["pressure"].int!) + " hPa"
             self.feelsLike = String(Int((json["main"]["feels_like"].float!).rounded())) + "°"
         }
