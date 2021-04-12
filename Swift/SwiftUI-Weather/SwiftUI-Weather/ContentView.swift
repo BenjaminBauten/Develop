@@ -20,14 +20,22 @@ struct ContentView: View {
                 
                 cityTextView(cityName: weatherData.cityName)
                 mainWeatherStatusView(weatherDataInScope: self.weatherData, currentTemperature: weatherData.currentTemperatureString, symbolName: weatherData.symbolName, weatherDescription: weatherData.weatherDescription, sunriseTime: weatherData.sunriseTime, sunsetTime: weatherData.sunsetTime, highestTemperature: weatherData.highestTemperature, lowestTemperature: weatherData.lowestTemperature)
-                ScrollView(.horizontal){
+                Divider()
+                    .frame(height: 1)
+                    .background(Color.white)
+                ScrollView(.horizontal, showsIndicators: false){
                     HStack (spacing: 20){
-                        
+                        Spacer()
                         ForEach(weatherData.forecastTime.indices){ i in
                             WeatherDayView(dayOfWeek: weatherData.forecastTime[i], imageName: weatherData.forecastIcon[i], temperature: weatherData.forecastTemperature[i])
                         }
+                        Spacer()
                     }
                 }
+                Divider()
+                    .frame(height: 1)
+                    .background(Color.white)
+                
                 Spacer()
                 
                 Button{
