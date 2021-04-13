@@ -194,12 +194,12 @@ struct informationView: View {
     var body: some View {
         VStack(alignment: .leading){
             Text(variableName)
-                .font(.system(size: 16, weight: .medium, design: .default))
-                .foregroundColor(.gray)
+                .font(.system(size: 14, weight: .medium, design: .default))
+                .foregroundColor(Color(hue: 1.0, saturation: 0.0, brightness: 0.63))
                 .padding()
-                .frame(height: 20)
+                .frame(height: 10)
             Text(variable)
-                .font(.system(size: 20, weight: .medium, design: .default))
+                .font(.system(size: 22, weight: .medium, design: .default))
                 .foregroundColor(.white)
                 .padding()
                 .frame(height: 20)

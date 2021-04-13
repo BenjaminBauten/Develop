@@ -31,14 +31,16 @@ class WeatherData: ObservableObject {
     @Published var windSpeed: String = ""
     
     @State var cityNameInScope:String = "Kevelaer"
-    @State var language:String = "en"
+    @State var language:String = "de"
     
     func getWeatherData(){
-        AF.request("https://api.openweathermap.org/data/2.5/weather?q=" + self.cityNameInScope + "&lang=" + self.language + "&appid=1319104a3baa155478e1466e9bc73c7d&units=metric").responseJSON {
+        
+        let localLanguage = Locale.current.languageCode!
+        print(localLanguage)
+        AF.request("https://api.openweathermap.org/data/2.5/weather?q=" + self.cityNameInScope + "&lang=" + localLanguage  + "&appid=1319104a3baa155478e1466e9bc73c7d&units=metric").responseJSON {
             response in
-
             let json = JSON(response.value!)
-            print(json)
+//            print(json)
             let icon = json["weather"][0]["icon"].string!
             self.currentTemperatureString = String(Int((json["main"]["temp"].float!).rounded())) + "°"
             self.cityName = json["name"].string!
@@ -80,9 +82,9 @@ class WeatherData: ObservableObject {
                 temperature += [Int((list[counter]["main"]["temp_max"].float!).rounded())]
                 
             }
-            print(icons)
-            print(time)
-            print(temperature)
+//            print(icons)
+//            print(time)
+//            print(temperature)
             self.forecastIcon = icons
             self.forecastTime = time
             self.forecastTemperature = temperature
