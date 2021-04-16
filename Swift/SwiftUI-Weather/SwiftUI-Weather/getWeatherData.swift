@@ -5,11 +5,14 @@
 //  Created by Benjamin Bauten on 23/03/2021.
 //
 
+import Foundation
 import SwiftUI
 import SwiftyJSON
 import Alamofire
 
 class WeatherData: ObservableObject {
+    
+    @ObservedObject private var locationManager = LocationManager()
     
     @Published var symbolName: String = ""
     @Published var currentTemperatureString: String = "--"
@@ -30,14 +33,14 @@ class WeatherData: ObservableObject {
     @Published var pressure: String = ""
     @Published var windSpeed: String = ""
     
-    @State var cityNameInScope:String = "Kevelaer"
+//    @State var cityNameInScope:String = "Kevelaer"
     @State var language:String = "de"
     
     func getWeatherData(){
         
         let localLanguage = Locale.current.languageCode!
         print(localLanguage)
-        AF.request("https://api.openweathermap.org/data/2.5/weather?q=" + self.cityNameInScope + "&lang=" + localLanguage  + "&appid=1319104a3baa155478e1466e9bc73c7d&units=metric").responseJSON {
+        AF.request("https://api.openweathermap.org/data/2.5/weather?q=" + locationManager.locationCityName + "&lang=" + localLanguage  + "&appid=1319104a3baa155478e1466e9bc73c7d&units=metric").responseJSON {
             response in
             let json = JSON(response.value!)
 //            print(json)
@@ -64,7 +67,7 @@ class WeatherData: ObservableObject {
     }
     
     func hourlyForecastWeatherData(){
-        AF.request("https://api.openweathermap.org/data/2.5/forecast?q=" + self.cityNameInScope + "&units=metric&appid=ca929c7fbdc1623d4837fb863f9853e0").responseJSON {
+        AF.request("https://api.openweathermap.org/data/2.5/forecast?q=" + locationManager.locationCityName + "&units=metric&appid=ca929c7fbdc1623d4837fb863f9853e0").responseJSON {
             response in
             
             let json = JSON(response.value!)

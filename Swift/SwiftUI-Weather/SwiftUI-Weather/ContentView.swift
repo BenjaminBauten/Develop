@@ -12,6 +12,7 @@ import Alamofire
 struct ContentView: View {
     
     @ObservedObject private var weatherData = WeatherData()
+    @ObservedObject private var locationManager = LocationManager()
     
     var body: some View {
         ZStack {
@@ -19,7 +20,7 @@ struct ContentView: View {
             VStack {
                 
                 cityTextView(cityName: weatherData.cityName)
-                mainWeatherStatusView(weatherDataInScope: self.weatherData, currentTemperature: weatherData.currentTemperatureString, symbolName: weatherData.symbolName, weatherDescription: weatherData.weatherDescription, sunriseTime: weatherData.sunriseTime, sunsetTime: weatherData.sunsetTime, highestTemperature: weatherData.highestTemperature, lowestTemperature: weatherData.lowestTemperature)
+                mainWeatherStatusView(locationManagerInScope: self.locationManager, weatherDataInScope: self.weatherData, currentTemperature: weatherData.currentTemperatureString, symbolName: weatherData.symbolName, weatherDescription: weatherData.weatherDescription, sunriseTime: weatherData.sunriseTime, sunsetTime: weatherData.sunsetTime, highestTemperature: weatherData.highestTemperature, lowestTemperature: weatherData.lowestTemperature)
                 Divider()
                     .frame(height: 1)
                     .background(Color.white)
@@ -55,10 +56,11 @@ struct ContentView: View {
                         .frame(height: 1.0)
                         .background(Color.white)
                 }
-                
+//                locationDataView()
                 Spacer()
                 
                 Button{
+                    locationManager.convertCoordinatesToPostCode()
                     weatherData.getWeatherData()
                     weatherData.hourlyForecastWeatherData()
                         
@@ -126,6 +128,7 @@ struct cityTextView: View {
 
 struct mainWeatherStatusView: View {
     
+    var locationManagerInScope: LocationManager
     var weatherDataInScope: WeatherData
     var currentTemperature: String
     var symbolName: String
@@ -169,7 +172,8 @@ struct mainWeatherStatusView: View {
                 Text(currentTemperature)
                     .font(.system(size: 70, weight: .medium))
                     .foregroundColor(.white)
-                    .onAppear{weatherDataInScope.getWeatherData()
+                    .onAppear{locationManagerInScope.convertCoordinatesToPostCode()
+                        weatherDataInScope.getWeatherData()
                         weatherDataInScope.hourlyForecastWeatherData()}
                 Spacer()
                 VStack(alignment: .leading){
@@ -206,3 +210,26 @@ struct informationView: View {
         }.frame(width: 130, alignment: .leading)
     }
 }
+
+//struct locationDataView: View {
+//
+//    @StateObject var locationManager = LocationManager()
+//
+//        var userLatitude: String {
+//            return "\(locationManager.lastLocation?.coordinate.latitude ?? 0)"
+//        }
+//
+//        var userLongitude: String {
+//            return "\(locationManager.lastLocation?.coordinate.longitude ?? 0)"
+//        }
+//
+//        var body: some View {
+//            VStack {
+//                Text("location status: \(locationManager.statusString)")
+//                HStack {
+//                    Text("latitude: \(userLatitude)")
+//                    Text("longitude: \(userLongitude)")
+//                }
+//            }
+//        }
+//}
