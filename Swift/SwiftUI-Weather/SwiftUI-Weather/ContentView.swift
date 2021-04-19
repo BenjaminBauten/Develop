@@ -20,7 +20,7 @@ struct ContentView: View {
             VStack {
                 
                 cityTextView(cityName: weatherData.cityName)
-                mainWeatherStatusView(locationManagerInScope: self.locationManager, weatherDataInScope: self.weatherData, currentTemperature: weatherData.currentTemperatureString, symbolName: weatherData.symbolName, weatherDescription: weatherData.weatherDescription, sunriseTime: weatherData.sunriseTime, sunsetTime: weatherData.sunsetTime, highestTemperature: weatherData.highestTemperature, lowestTemperature: weatherData.lowestTemperature)
+                mainWeatherStatusView(weatherDataInScope: self.weatherData, currentTemperature: weatherData.currentTemperatureString, symbolName: weatherData.symbolName, weatherDescription: weatherData.weatherDescription, sunriseTime: weatherData.sunriseTime, sunsetTime: weatherData.sunsetTime, highestTemperature: weatherData.highestTemperature, lowestTemperature: weatherData.lowestTemperature)
                 Divider()
                     .frame(height: 1)
                     .background(Color.white)
@@ -60,7 +60,7 @@ struct ContentView: View {
                 Spacer()
                 
                 Button{
-                    locationManager.convertCoordinatesToPostCode()
+//                    locationManager.convertCoordinatesToPostCode()
                     weatherData.getWeatherData()
                     weatherData.hourlyForecastWeatherData()
                         
@@ -128,7 +128,7 @@ struct cityTextView: View {
 
 struct mainWeatherStatusView: View {
     
-    var locationManagerInScope: LocationManager
+//    var locationManagerInScope: LocationManager
     var weatherDataInScope: WeatherData
     var currentTemperature: String
     var symbolName: String
@@ -172,7 +172,7 @@ struct mainWeatherStatusView: View {
                 Text(currentTemperature)
                     .font(.system(size: 70, weight: .medium))
                     .foregroundColor(.white)
-                    .onAppear{locationManagerInScope.convertCoordinatesToPostCode()
+                    .onAppear{//locationManagerInScope.convertCoordinatesToPostCode()
                         weatherDataInScope.getWeatherData()
                         weatherDataInScope.hourlyForecastWeatherData()}
                 Spacer()

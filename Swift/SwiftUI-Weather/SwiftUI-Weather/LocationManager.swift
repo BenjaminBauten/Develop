@@ -14,7 +14,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     private let locationManager = CLLocationManager()
     @Published var lastLocation: CLLocation?
     private var locationStatus: CLAuthorizationStatus?
-    @Published var locationCityName: String = "47574"
+//    @Published var locationCityName: String = "47626"
     
     override init() {
         super.init()
@@ -47,24 +47,24 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         self.lastLocation = location
         print(#function, location)
     }
-    func convertCoordinatesToPostCode(){
-
-        let geoCoder = CLGeocoder()
-        let location = CLLocation(latitude: Double(self.lastLocation?.coordinate.latitude ?? 0), longitude: Double(self.lastLocation?.coordinate.longitude ?? 0))
-
-        geoCoder.reverseGeocodeLocation(location, completionHandler:
-                    {
-                        placemarks, error -> Void in
-
-                        // Place details
-                        guard let placeMark = placemarks?.first else { return }
-
-                        // City
-                        if let city = placeMark.subAdministrativeArea {
-                            self.locationCityName = city
-                            print(city)
-                        }
-                })
-
-    }
+//    func convertCoordinatesToPostCode(){
+//
+//        let geoCoder = CLGeocoder()
+//        let location = CLLocation(latitude: Double(self.lastLocation?.coordinate.latitude ?? 0), longitude: Double(self.lastLocation?.coordinate.longitude ?? 0))
+//
+//        geoCoder.reverseGeocodeLocation(location, completionHandler:
+//                    {
+//                        placemarks, error -> Void in
+//
+//                        // Place details
+//                        guard let placeMark = placemarks?.first else { return }
+//
+//                        // City
+//                        if let city = placeMark.subAdministrativeArea {
+//                            self.locationCityName = city
+//                            print(city)
+//                        }
+//                })
+//
+//    }
 }

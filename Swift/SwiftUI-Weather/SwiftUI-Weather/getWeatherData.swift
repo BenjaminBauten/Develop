@@ -40,10 +40,10 @@ class WeatherData: ObservableObject {
         
         let localLanguage = Locale.current.languageCode!
         print(localLanguage)
-        AF.request("https://api.openweathermap.org/data/2.5/weather?q=" + locationManager.locationCityName + "&lang=" + localLanguage  + "&appid=1319104a3baa155478e1466e9bc73c7d&units=metric").responseJSON {
+        AF.request("https://api.openweathermap.org/data/2.5/weather?lat=" + String(locationManager.lastLocation!.coordinate.latitude) +
+                   "&lon=" + String(locationManager.lastLocation!.coordinate.longitude) + "&lang=" + localLanguage + "&appid=1319104a3baa155478e1466e9bc73c7d&units=metric").responseJSON {
             response in
             let json = JSON(response.value!)
-//            print(json)
             let icon = json["weather"][0]["icon"].string!
             self.currentTemperatureString = String(Int((json["main"]["temp"].float!).rounded())) + "°"
             self.cityName = json["name"].string!
@@ -67,7 +67,8 @@ class WeatherData: ObservableObject {
     }
     
     func hourlyForecastWeatherData(){
-        AF.request("https://api.openweathermap.org/data/2.5/forecast?q=" + locationManager.locationCityName + "&units=metric&appid=ca929c7fbdc1623d4837fb863f9853e0").responseJSON {
+        AF.request("https://api.openweathermap.org/data/2.5/forecast?lat=" + String(locationManager.lastLocation!.coordinate.latitude) +
+                    "&lon=" + String(locationManager.lastLocation!.coordinate.longitude) +  "&units=metric&appid=ca929c7fbdc1623d4837fb863f9853e0").responseJSON {
             response in
             
             let json = JSON(response.value!)
