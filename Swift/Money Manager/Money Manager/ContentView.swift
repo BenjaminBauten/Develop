@@ -9,9 +9,19 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack{
-            headingView()
-            lastMonthExpenseView()
+        ZStack{
+            Color("LightGray")
+                    .edgesIgnoringSafeArea(.all)
+            VStack{
+                headingView()
+                Spacer()
+                Text("Last Month Expense")
+                    .frame(width: 350, alignment: .leading)
+                    .font(.headline)
+                lastMonthExpenseView()
+                Spacer()
+                navigationBar()
+            }
         }
     }
 }
@@ -27,23 +37,24 @@ struct headingView: View{
         ZStack(alignment: .leading){
             LinearGradient(gradient: Gradient(colors: [.blue, .green]), startPoint: .topLeading, endPoint: .bottomTrailing)
                 .edgesIgnoringSafeArea(.all)
-                VStack(alignment: .leading){
-                    Spacer()
-                    Image("ProfileImage")
-                        .resizable()
-                        .frame(width: 50, height: 50, alignment: .leading)
-                        .cornerRadius(25)
-                    Spacer()
-                    Text("Account Balance")
-                        .foregroundColor(.white)
-                        .font(.system(size: 13, weight: .medium))
-                    Text("545.45€")
-                        .foregroundColor(.white)
-                        .font(.system(size: 25, weight: .medium))
-                    Spacer()
-                    
-                }
-            }.frame(height: 200, alignment: .top)
+            VStack(alignment: .leading){
+                Spacer()
+                Image("ProfileImage")
+                    .resizable()
+                    .frame(width: 50, height: 50, alignment: .leading)
+                    .cornerRadius(25)
+                Spacer()
+                Text("Account Balance")
+                    .foregroundColor(.white)
+                    .font(.system(size: 13, weight: .medium))
+                Text("545.45€")
+                    .foregroundColor(.white)
+                    .font(.system(size: 25, weight: .medium))
+                Spacer()
+                
+            }
+        }.frame(height: 200, alignment: .bottom)
+        
     }
 }
 
@@ -51,11 +62,16 @@ struct lastMonthExpenseView: View {
     var body: some View{
         VStack{
             expenseList()
+            Divider()
             expenseList()
+            Divider()
             expenseList()
+            Divider()
             expenseList()
-            
         }
+        .frame(width: 350, height: 400, alignment: .top)
+        .background(Color.white)
+        .cornerRadius(20)
     }
 }
 
@@ -70,6 +86,30 @@ struct expenseList: View {
             Spacer()
             Text("-63.45")
             
+        }.frame(width: 330, height: 60, alignment: .center)
+    }
+}
+
+struct navigationBar: View {
+    var body: some View{
+        HStack{
+            VStack{
+                Image(systemName: "creditcard")
+                Text("Spend")
+            }
+            Spacer()
+            VStack{
+                Image(systemName: "calendar")
+                Text("Schedule")
+            }
+            Spacer()
+            VStack{
+                Image(systemName: "line.horizontal.3")
+                Text("Menu")
+            }
+            
         }
+        .edgesIgnoringSafeArea(.all)
+        .background(Color.white)
     }
 }
