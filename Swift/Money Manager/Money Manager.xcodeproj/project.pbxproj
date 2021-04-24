@@ -11,6 +11,8 @@
 		C574FE652631BE9400AA8667 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C574FE642631BE9400AA8667 /* ContentView.swift */; };
 		C574FE672631BE9600AA8667 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C574FE662631BE9600AA8667 /* Assets.xcassets */; };
 		C574FE6A2631BE9600AA8667 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C574FE692631BE9600AA8667 /* Preview Assets.xcassets */; };
+		C5E610C526344EA8006351CE /* navigationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E610C426344EA8006351CE /* navigationButton.swift */; };
+		C5E610C92634525D006351CE /* addEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5E610C82634525D006351CE /* addEntryView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +22,8 @@
 		C574FE662631BE9600AA8667 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C574FE692631BE9600AA8667 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C574FE6B2631BE9600AA8667 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C5E610C426344EA8006351CE /* navigationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = navigationButton.swift; sourceTree = "<group>"; };
+		C5E610C82634525D006351CE /* addEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addEntryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,8 +56,10 @@
 		C574FE612631BE9400AA8667 /* Money Manager */ = {
 			isa = PBXGroup;
 			children = (
+				C5E610C426344EA8006351CE /* navigationButton.swift */,
 				C574FE622631BE9400AA8667 /* Money_ManagerApp.swift */,
 				C574FE642631BE9400AA8667 /* ContentView.swift */,
+				C5E610C82634525D006351CE /* addEntryView.swift */,
 				C574FE662631BE9600AA8667 /* Assets.xcassets */,
 				C574FE6B2631BE9600AA8667 /* Info.plist */,
 				C574FE682631BE9600AA8667 /* Preview Content */,
@@ -140,6 +146,8 @@
 			files = (
 				C574FE652631BE9400AA8667 /* ContentView.swift in Sources */,
 				C574FE632631BE9400AA8667 /* Money_ManagerApp.swift in Sources */,
+				C5E610C526344EA8006351CE /* navigationButton.swift in Sources */,
+				C5E610C92634525D006351CE /* addEntryView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
