@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C56668CE2635B75C00B06E07 /* homeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56668CD2635B75C00B06E07 /* homeView.swift */; };
+		C56668D22635BA3C00B06E07 /* settingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56668D12635BA3C00B06E07 /* settingsView.swift */; };
+		C56668D626360C5A00B06E07 /* planningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56668D526360C5A00B06E07 /* planningView.swift */; };
+		C56668D926360C7D00B06E07 /* statisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C56668D826360C7D00B06E07 /* statisticsView.swift */; };
 		C574FE632631BE9400AA8667 /* Money_ManagerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C574FE622631BE9400AA8667 /* Money_ManagerApp.swift */; };
 		C574FE652631BE9400AA8667 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C574FE642631BE9400AA8667 /* ContentView.swift */; };
 		C574FE672631BE9600AA8667 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C574FE662631BE9600AA8667 /* Assets.xcassets */; };
@@ -16,6 +20,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C56668CD2635B75C00B06E07 /* homeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = homeView.swift; sourceTree = "<group>"; };
+		C56668D12635BA3C00B06E07 /* settingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = settingsView.swift; sourceTree = "<group>"; };
+		C56668D526360C5A00B06E07 /* planningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = planningView.swift; sourceTree = "<group>"; };
+		C56668D826360C7D00B06E07 /* statisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = statisticsView.swift; sourceTree = "<group>"; };
 		C574FE5F2631BE9400AA8667 /* Money Manager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Money Manager.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C574FE622631BE9400AA8667 /* Money_ManagerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Money_ManagerApp.swift; sourceTree = "<group>"; };
 		C574FE642631BE9400AA8667 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -60,6 +68,10 @@
 				C574FE622631BE9400AA8667 /* Money_ManagerApp.swift */,
 				C574FE642631BE9400AA8667 /* ContentView.swift */,
 				C5E610C82634525D006351CE /* addEntryView.swift */,
+				C56668CD2635B75C00B06E07 /* homeView.swift */,
+				C56668D12635BA3C00B06E07 /* settingsView.swift */,
+				C56668D526360C5A00B06E07 /* planningView.swift */,
+				C56668D826360C7D00B06E07 /* statisticsView.swift */,
 				C574FE662631BE9600AA8667 /* Assets.xcassets */,
 				C574FE6B2631BE9600AA8667 /* Info.plist */,
 				C574FE682631BE9600AA8667 /* Preview Content */,
@@ -144,9 +156,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C56668D626360C5A00B06E07 /* planningView.swift in Sources */,
 				C574FE652631BE9400AA8667 /* ContentView.swift in Sources */,
 				C574FE632631BE9400AA8667 /* Money_ManagerApp.swift in Sources */,
 				C5E610C526344EA8006351CE /* navigationButton.swift in Sources */,
+				C56668D22635BA3C00B06E07 /* settingsView.swift in Sources */,
+				C56668D926360C7D00B06E07 /* statisticsView.swift in Sources */,
+				C56668CE2635B75C00B06E07 /* homeView.swift in Sources */,
 				C5E610C92634525D006351CE /* addEntryView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
