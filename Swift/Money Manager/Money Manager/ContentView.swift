@@ -32,7 +32,9 @@ struct navigationBar: View {
             }
         addEntryView()
             .tabItem {
-                Image(systemName: "plus.circle")
+                Image("PlusIcon")
+                    .resizable()
+                
             }
         planningView()
             .tabItem{

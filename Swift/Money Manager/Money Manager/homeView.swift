@@ -154,9 +154,9 @@ struct recentTransactionsView: View {
                     .font(.system(size: 15, weight: .bold))
             }
             VStack(){
-                recentTransactionsRow()
-                recentTransactionsRow()
-                recentTransactionsRow()
+                recentTransactionsRow(category: "Food & Beverage", date: "Today", description: "MC Donalds", ammount: "-$16.00")
+                recentTransactionsRow(category: "Food & Beverage", date: "Yesterday", description: "Starbucks", ammount: "-$7.00")
+                recentTransactionsRow(category: "Food & Beverage", date: "Yesterday", description: "Milos Kebab", ammount: "-$25.00")
             }
             .background(Color.white)
             .cornerRadius(15)
@@ -165,6 +165,10 @@ struct recentTransactionsView: View {
 }
 
 struct recentTransactionsRow: View{
+    var category: String
+    var date: String
+    var description: String
+    var ammount: String
     var body: some View{
         HStack{
             Image("FoodIcon")
@@ -172,16 +176,16 @@ struct recentTransactionsRow: View{
                 .frame(width: 40, height: 40)
             Spacer()
             VStack(alignment: .leading){
-                Text("Food & Beverage")
+                Text(category)
                 HStack{
-                    Text("Today")
+                    Text(date)
                     Text("•")
-                    Text("Makan Basko")
+                    Text(description)
                 }
                 .foregroundColor(.gray)
             }
             Spacer()
-            Text("-$15.00")
+            Text(ammount)
                 .foregroundColor(.red)
                 .font(.system(size: 15, weight: .bold))
         }.padding()
